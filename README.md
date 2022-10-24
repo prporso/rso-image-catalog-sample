@@ -22,3 +22,7 @@ docker run novaslika
 docker tag novaslika prporso/novaslika   
 docker push prporso/novaslika
 docker ps
+```
+
+
+
