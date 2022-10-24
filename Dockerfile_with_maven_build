@@ -1,9 +1,9 @@
-FROM maven:3.6.3-openjdk-15 AS build
+FROM maven:3.8.6-openjdk-18 AS build
 COPY ./ /app
 WORKDIR /app
 RUN mvn --show-version --update-snapshots --batch-mode clean package
 
-FROM adoptopenjdk:15-jre-hotspot
+FROM amazoncorretto:18
 RUN mkdir /app
 WORKDIR /app
 COPY --from=build ./app/api/target/image-catalog-api-1.0.0-SNAPSHOT.jar /app
