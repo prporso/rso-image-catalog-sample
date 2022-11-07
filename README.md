@@ -29,5 +29,18 @@ docker push prporso/novaslika
 docker ps
 ```
 
-
+## Kubernetes
+```bash
+kubectl version
+kubectl --help
+kubectl get nodes
+kubectl create -f image-catalog-deployment.yaml 
+kubectl apply -f image-catalog-deployment.yaml 
+kubectl get services 
+kubectl get deployments
+kubectl get pods
+kubectl logs image-catalog-deployment-6f59c5d96c-rjz46
+kubectl delete pod image-catalog-deployment-6f59c5d96c-rjz46
+```
+Secrets: https://kubernetes.io/docs/concepts/configuration/secret/
 

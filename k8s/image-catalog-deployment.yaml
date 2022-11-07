@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: image-catalog-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: image-catalog
+  template:
+    metadata:
+      labels:
+        app: image-catalog
+    spec:
+      containers:
+        - image: prporso/image-catalog:2022-10-27-17-33-13
+          name: image-catalog
+          env:
+            - name: KUMULUZEE_DATASOURCES0_CONNECTIONURL
+              value: jdbc:postgresql://fanny.db.elephantsql.com:5432/zqjqqtrd
+            - name: KUMULUZEE_DATASOURCES0_USERNAME
+              value: zqjqqtrd
+            - name: KUMULUZEE_DATASOURCES0_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pg-pass
+                  key: KUMULUZEE_DATASOURCES0_PASSWORD
+          ports:
+            - containerPort: 8080
+              name: server
+              protocol: TCP
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: image-catalog
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: server
+  selector:
+    app: image-catalog
