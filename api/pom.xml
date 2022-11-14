@@ -33,6 +33,11 @@
             <artifactId>kumuluzee-openapi-mp-ui</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.kumuluz.ee.config</groupId>
+            <artifactId>kumuluzee-config-consul</artifactId>
+        </dependency>
+
 
         <dependency>
             <groupId>si.fri.rso.samples</groupId>
