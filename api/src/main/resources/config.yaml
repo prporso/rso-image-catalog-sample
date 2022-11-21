@@ -13,5 +13,26 @@ kumuluzee:
       username: dbuser
       password: postgres
       max-pool-size: 20
+  health:
+    checks:
+      data-source-health-check:
+        type: liveness
+        jndi-name: jdbc/ImageMetadataDS
+    metrics:
+      web-instrumentation:
+        - name: images-endpoint
+          url-pattern: /v1/images/*
 rest-properties:
   maintenance-mode: false
+  broken: false
+
+#kumuluzee.name
+#KUMULUEE_NAME
+
+#kumuluzee.env.name
+#KUMULUZEE_ENV_NAME
+
+#kumuluzee.datasources[0].connection-url
+#KUMULZEE_DATASOURCES0_CONNECTIONURL
+
+

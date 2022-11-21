@@ -13,7 +13,7 @@ spec:
         app: image-catalog
     spec:
       containers:
-        - image: prporso/image-catalog:2022-10-27-17-33-13
+        - image: prporso/image-catalog:2022-11-14-12-45-13
           name: image-catalog
           env:
             - name: KUMULUZEE_DATASOURCES0_CONNECTIONURL
@@ -29,6 +29,18 @@ spec:
             - containerPort: 8080
               name: server
               protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: server
+            initialDelaySeconds: 20
+            periodSeconds: 3
+          readinessProbe:
+              httpGet:
+                path: /health/ready
+                port: server
+              initialDelaySeconds: 20
+              periodSeconds: 3
 
 ---
 
