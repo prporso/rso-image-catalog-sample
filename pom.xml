@@ -31,6 +31,9 @@
         <kumuluzee-health.version>2.4.3</kumuluzee-health.version>
         <kumuluzee-metrics.version>2.3.0</kumuluzee-metrics.version>
 
+        <kumuluzee-logs.version>1.4.6</kumuluzee-logs.version>
+        <aws-java-sdk.version>1.12.350</aws-java-sdk.version>
+
         <postgresql.version>42.5.0</postgresql.version>
     </properties>
 
@@ -91,6 +94,18 @@
                 <groupId>com.kumuluz.ee.metrics</groupId>
                 <artifactId>kumuluzee-metrics-core</artifactId>
                 <version>${kumuluzee-metrics.version}</version>
+            </dependency>
+
+            <dependency>
+                <artifactId>kumuluzee-logs-log4j2</artifactId>
+                <groupId>com.kumuluz.ee.logs</groupId>
+                <version>${kumuluzee-logs.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.amazonaws</groupId>
+                <artifactId>aws-java-sdk-rekognition</artifactId>
+                <version>${aws-java-sdk.version}</version>
             </dependency>
 
             <dependency>

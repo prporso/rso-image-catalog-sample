@@ -16,23 +16,39 @@ kumuluzee:
   health:
     checks:
       data-source-health-check:
-        type: liveness
         jndi-name: jdbc/ImageMetadataDS
-    metrics:
-      web-instrumentation:
-        - name: images-endpoint
-          url-pattern: /v1/images/*
+        type: liveness
+  metrics:
+    web-instrumentation:
+      - name: images-endpoint
+        url-pattern: /v1/images/*
+  logs:
+    config-file: '<?xml version="1.0" encoding="UTF-8"?>
+                          <Configuration name="comments">
+                              <Appenders>
+                                  <Console name="console" target="SYSTEM_OUT">
+                                      <PatternLayout pattern="%d %p %marker %m %X %ex %n"/>
+                                  </Console>
+                                  <Socket name="logstash" host="14c805d1-45a9-4d59-93b4-fc92236277b8-ls.logit.io"
+                                  port="54321" protocol="udp">
+                                      <JSONLayout complete="false" compact="true" eventEol="true" charset="UTF-8" properties="true"/>
+                                  </Socket>
+                              </Appenders>
+                              <Loggers>
+                                  <!-- Default logger -->
+                                  <Root level="all">
+                                      <AppenderRef ref="console" level="info" />
+                                      <AppenderRef ref="logstash" level="trace" />
+                                  </Root>
+                              </Loggers>
+                          </Configuration>'
 rest-properties:
   maintenance-mode: false
   broken: false
+app-properties:
+  amazon-rekognition:
+    access-key:
+    secret-key:
 
-#kumuluzee.name
-#KUMULUEE_NAME
-
-#kumuluzee.env.name
-#KUMULUZEE_ENV_NAME
-
-#kumuluzee.datasources[0].connection-url
-#KUMULZEE_DATASOURCES0_CONNECTIONURL
 
 
