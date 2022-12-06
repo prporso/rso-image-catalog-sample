@@ -28,11 +28,14 @@
         <kumuluzee-config-mp.version>2.0.0</kumuluzee-config-mp.version>
         <kumuluzee-config.version>1.3.0</kumuluzee-config.version>
 
-        <kumuluzee-health.version>2.4.3</kumuluzee-health.version>
+        <kumuluzee-health.version>2.4.4</kumuluzee-health.version>
         <kumuluzee-metrics.version>2.3.0</kumuluzee-metrics.version>
 
         <kumuluzee-logs.version>1.4.6</kumuluzee-logs.version>
         <aws-java-sdk.version>1.12.350</aws-java-sdk.version>
+
+        <kumuluzee-fault-tolerance.version>2.1.1</kumuluzee-fault-tolerance.version>
+        <kumuluzee-rest-client.version>2.0.0</kumuluzee-rest-client.version>
 
         <postgresql.version>42.5.0</postgresql.version>
     </properties>
@@ -106,6 +109,18 @@
                 <groupId>com.amazonaws</groupId>
                 <artifactId>aws-java-sdk-rekognition</artifactId>
                 <version>${aws-java-sdk.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.kumuluz.ee.fault.tolerance</groupId>
+                <artifactId>kumuluzee-fault-tolerance-smallrye</artifactId>
+                <version>${kumuluzee-fault-tolerance.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.kumuluz.ee.rest-client</groupId>
+                <artifactId>kumuluzee-rest-client</artifactId>
+                <version>${kumuluzee-rest-client.version}</version>
             </dependency>
 
             <dependency>

@@ -10,10 +10,13 @@ import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
 import si.fri.rso.samples.imagecatalog.api.v1.dtos.UploadImageResponse;
 import si.fri.rso.samples.imagecatalog.lib.ImageMetadata;
 import si.fri.rso.samples.imagecatalog.services.beans.ImageMetadataBean;
 import si.fri.rso.samples.imagecatalog.services.clients.AmazonRekognitionClient;
+import si.fri.rso.samples.imagecatalog.services.clients.ImageProcessingApi;
+import si.fri.rso.samples.imagecatalog.services.dtos.ImageProcessRequest;
 
 
 import javax.enterprise.context.ApplicationScoped;
@@ -27,6 +30,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.CompletionStage;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -49,6 +53,10 @@ public class ImageMetadataResource {
 
     @Inject
     private AmazonRekognitionClient amazonRekognitionClient;
+
+    @Inject
+    @RestClient
+    private ImageProcessingApi imageProcessingApi;
 
     @Operation(description = "Get all image metadata.", summary = "Get all metadata")
     @APIResponses({
@@ -205,6 +213,15 @@ public class ImageMetadataResource {
 
         // Generate event for image processing
 
+        // start image processing over async API
+        CompletionStage<String> stringCompletionStage =
+                imageProcessingApi.processImageAsynch(new ImageProcessRequest(imageId, imageLocation));
+
+        stringCompletionStage.whenComplete((s, throwable) -> System.out.println(s));
+        stringCompletionStage.exceptionally(throwable -> {
+            log.severe(throwable.getMessage());
+            return throwable.getMessage();
+        });
 
         return Response.status(Response.Status.CREATED).entity(uploadImageResponse).build();
     }

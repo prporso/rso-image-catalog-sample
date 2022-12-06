@@ -29,7 +29,7 @@ kumuluzee:
                                   <Console name="console" target="SYSTEM_OUT">
                                       <PatternLayout pattern="%d %p %marker %m %X %ex %n"/>
                                   </Console>
-                                  <Socket name="logstash" host="14c805d1-45a9-4d59-93b4-fc92236277b8-ls.logit.io"
+                                  <Socket name="logstash" host="24c805d1-45a9-4d59-93b4-fc92236277b8-ls.logit.io"
                                   port="54321" protocol="udp">
                                       <JSONLayout complete="false" compact="true" eventEol="true" charset="UTF-8" properties="true"/>
                                   </Socket>
@@ -42,6 +42,11 @@ kumuluzee:
                                   </Root>
                               </Loggers>
                           </Configuration>'
+  rest-client:
+    registrations:
+      - class: image-processing-api
+        url: http://localhost:8082/v1
+        read-timeout: 5000
 rest-properties:
   maintenance-mode: false
   broken: false
