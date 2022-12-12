@@ -48,6 +48,14 @@ Key: environments/dev/services/image-catalog-service/1.0.0/config/rest-propertie
 
 Value: true or false
 
+### Deploy Consul to Kubernetes
+Prerequisites:
+- install Azure CLI, kubectl, and helm
+- create a Kubernetes cluster
+- configure kubectl to talk to your cluster
+
+Deploy Consul to Kubernetes. You can use the [tutorial](https://developer.hashicorp.com/consul/tutorials/kubernetes-deploy/kubernetes-aks-azure). Do customize your deployment.
+
 ## Kubernetes
 ```bash
 kubectl version

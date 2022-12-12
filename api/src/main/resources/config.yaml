@@ -12,7 +12,8 @@ kumuluzee:
       connection-url: jdbc:postgresql://localhost:5432/image-metadata
       username: dbuser
       password: postgres
-      max-pool-size: 20
+      pool:
+        max-size: 20
   health:
     checks:
       data-source-health-check:
@@ -47,6 +48,11 @@ kumuluzee:
       - class: image-processing-api
         url: http://localhost:8082/v1
         read-timeout: 5000
+  dev:
+    scan-libraries:
+      - image-catalog-services
+      - image-catalog-models
+      - image-catalog-lib
 rest-properties:
   maintenance-mode: false
   broken: false
