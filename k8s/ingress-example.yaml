@@ -18,11 +18,13 @@ spec:
                 name: image-catalog
                 port:
                   number: 8080
-#          - path: /image-catalog(/|$)(.*)
+#          - path: /comments(/|$)(.*)
 #            pathType: Prefix
 #            backend:
 #              service:
-#                name: image-catalog
+#                name: comments
 #                port:
-#                  number: 8080
+#                  number: 8081
+
+#kubectl get ingress
 
