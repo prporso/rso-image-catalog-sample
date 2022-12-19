@@ -1,6 +1,7 @@
 package si.fri.rso.samples.imagecatalog.api.v1.resources;
 
 import com.kumuluz.ee.logs.cdi.Log;
+import com.kumuluz.ee.streaming.common.annotations.StreamProducer;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.headers.Header;
@@ -17,6 +18,7 @@ import si.fri.rso.samples.imagecatalog.services.beans.ImageMetadataBean;
 import si.fri.rso.samples.imagecatalog.services.clients.AmazonRekognitionClient;
 import si.fri.rso.samples.imagecatalog.services.clients.ImageProcessingApi;
 import si.fri.rso.samples.imagecatalog.services.dtos.ImageProcessRequest;
+import si.fri.rso.samples.imagecatalog.services.streaming.EventProducerImpl;
 
 
 import javax.enterprise.context.ApplicationScoped;
@@ -47,6 +49,9 @@ public class ImageMetadataResource {
     @Inject
     private ImageMetadataBean imageMetadataBean;
 
+
+    @Inject
+    private EventProducerImpl eventProducer;
 
     @Context
     protected UriInfo uriInfo;
@@ -212,6 +217,7 @@ public class ImageMetadataResource {
         // Upload image to storage
 
         // Generate event for image processing
+        eventProducer.produceMessage(imageId, imageLocation);
 
         // start image processing over async API
         CompletionStage<String> stringCompletionStage =

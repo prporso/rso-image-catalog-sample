@@ -53,6 +53,25 @@ kumuluzee:
       - image-catalog-services
       - image-catalog-models
       - image-catalog-lib
+  streaming:
+    kafka:
+      producer:
+        bootstrap-servers: ark-01.srvs.cloudkafka.com:9094
+        acks: all
+        retries: 0
+        batch-size: 16384
+        linger-ms: 1
+        buffer-memory: 33554432
+        key-serializer: org.apache.kafka.common.serialization.StringSerializer
+        value-serializer: org.apache.kafka.common.serialization.StringSerializer
+        security-protocol: SASL_SSL
+        sasl-mechanism: SCRAM-SHA-256
+        group-id: newer
+        enable-auto-commit: true
+        auto-commit-interval-ms: 1000
+        auto-offset-reset: earliest
+        session-timeout-ms: 30000
+        sasl-jaas-config:
 rest-properties:
   maintenance-mode: false
   broken: false
